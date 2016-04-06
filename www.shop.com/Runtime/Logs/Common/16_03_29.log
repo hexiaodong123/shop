@@ -1,0 +1,16 @@
+[ 2016-03-29T12:01:31+08:00 ] 192.168.2.105 /admin.shop.com/Application/Admin/View/Supplier/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000258s ]
+ERR: 无法加载模块:Admin.shop.com
+
+[ 2016-03-29T12:01:35+08:00 ] 192.168.2.105 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000425s ]
+
+[ 2016-03-29T12:01:35+08:00 ] 192.168.2.105 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000308s ]
+

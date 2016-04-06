@@ -1,0 +1,62 @@
+<extend name="Common:edit"/>
+<block name="display">
+    <div class="main-div">
+        <form method="post" action="{:U('add')}" >
+            <table cellspacing="1" cellpadding="3" width="100%">
+                <tr>
+                    <td class="label">{$meta_name}名称</td>
+                    <td>
+                        <input type="text" name="name" value="{:isset($row['name'])?$row['name']:''}" maxlength="60" value="" />
+                        <span class="require-field">*</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label">{$meta_name}网址</td>
+                    <td>
+                        <input type="text" name="url" value="{:isset($row['url'])?$row['url']:''}" maxlength="60" value="" />
+                        <span class="require-field">*</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label">{$meta_name}logo</td>
+                    <td>
+                        <input type="file" name="logo" value="{:isset($row['logo'])?$row['logo']:''}" maxlength="60" value="" />
+                        <span class="require-field">*</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label">{$meta_name}简介</td>
+                    <td>
+                        <textarea  name="intro"  cols="60" rows="4"  >{:isset($row['intro'])?$row['intro']:''}</textarea>
+                        <span class="require-field">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">排序</td>
+                    <td>
+                        <input type="text" name="sort" value="{:isset($row['sort'])?$row['sort']:''}" maxlength="40" size="15" value="20" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">是否显示</td>
+                    <td>
+
+                        <input type="radio" name="status" value="1" {:isset($row['status'])?($row['status']==1?'checked':''):'checked' }  /> 是
+                        <input type="radio" name="status" value="0" {:$row['status']===0?'checked':''}  /> 否
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><br />
+                        <input type="hidden" value="{:isset($row['id'])?$row['id']:''}" name="id"/>
+                        <input type="submit" class="button ajax-post" value=" 确定 " onclick="window.event.returnValue=false"/>
+                        <input type="reset" class="button" value=" 重置 " />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</block>

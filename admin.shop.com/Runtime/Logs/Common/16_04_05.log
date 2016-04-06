@@ -1,0 +1,55 @@
+[ 2016-04-05T22:30:16+08:00 ] 192.168.1.101 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000431s ]
+
+[ 2016-04-05T22:30:33+08:00 ] 192.168.1.101 /Public/Admin/images/icon_add.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000437s ]
+
+[ 2016-04-05T22:30:33+08:00 ] 192.168.1.101 /Public/Admin/images/button_bg.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000392s ]
+
+[ 2016-04-05T22:30:33+08:00 ] 192.168.1.101 /Public/Admin/images/th_bg.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000287s ]
+
+[ 2016-04-05T22:31:21+08:00 ] 192.168.1.101 /Public/Admin/images/icon_add.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000434s ]
+
+[ 2016-04-05T22:31:21+08:00 ] 192.168.1.101 /Public/Admin/images/th_bg.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000301s ]
+
+[ 2016-04-05T22:31:21+08:00 ] 192.168.1.101 /Public/Admin/images/button_bg.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000399s ]
+
+[ 2016-04-05T22:31:21+08:00 ] 192.168.1.101 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000279s ]
+
+[ 2016-04-05T22:39:10+08:00 ] 192.168.1.101 /index.php/Admin/Gii/__IMG__/%7B$row.status%7D.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000389s ]
+
+[ 2016-04-05T22:40:05+08:00 ] 192.168.1.101 /index.php/Admin/Gii/__IMG__/%7B$row.status%7D.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000250s ]
+
+[ 2016-04-05T23:17:25+08:00 ] 192.168.1.101 /Public/Admin/images/icon_add.gif
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000267s ]
+

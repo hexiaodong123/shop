@@ -1,0 +1,18 @@
+<extend name="Common:index"/>
+<block name="delete_show_hidden"></block>
+<block name="search"></block>
+<block name="top">
+    <h1>
+        <span class="action-span1"><a href="__GROUP__">ECSHOP 管理中心</a></span>
+        <span id="search_id" class="action-span1"> - {$meta_name} </span>
+        <div style="clear:both"></div>
+    </h1>
+</block>
+<block name="display">
+    <div class="form-div">
+        <form method="post" action="{:U('index')}">
+            控制器名:<input type="text" name="controller_name"/>&nbsp;
+            <input type="submit" value="生成代码"/>
+        </form>
+    </div>
+</block>
