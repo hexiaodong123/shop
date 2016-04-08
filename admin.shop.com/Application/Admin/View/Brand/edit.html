@@ -1,4 +1,7 @@
 <extend name="Common:edit"/>
+<block name="css">
+    <link href="__CSS__/common.css" rel="stylesheet" type="text/css"/>
+</block>
 <block name="display">
     <div class="main-div">
         <form method="post" action="{:U('add')}" >
@@ -22,8 +25,14 @@
                 <tr>
                     <td class="label">{$meta_name}logo</td>
                     <td>
-                        <input type="file" name="logo" value="{:isset($row['logo'])?$row['logo']:''}" maxlength="60" value="" />
-                        <span class="require-field">*</span>
+                        <input type="file" id="logo_upload" name="logo"  maxlength="60" value="" />
+                        <input type='hidden' class="logo" name='logo' maxlength='60'/>
+
+                        <div class="upload-img-box" style="display: none">
+                            <div class="upload-pre-item">
+                                <img src="">
+                            </div>
+                        </div>
                     </td>
                 </tr>
 
@@ -59,4 +68,28 @@
         </form>
     </div>
 
+</block>
+<block name="js">
+    <script type="text/javascript" src="__UPLOAD__/jquery.uploadify.min.js"></script>
+    <script type="text/javascript">
+        $("#logo_upload").uploadify({
+            height:30,
+            width:100,
+            debug:true,
+            buttonText:"上传图片",
+            formData:{'dir':'Brand/','root':'./Uploads/'},
+            swf:"__UPLOAD__/uploadify.swf",
+            uploader:"{:U('Upload/index')}",
+            fileObjName:'fileData',
+            onUploadSuccess:function(file,data,response){
+                $(".upload-img-box").css('display','block');
+                $('.upload-pre-item').children('img').attr('src','/Uploads/'+data);
+                $('.logo').val('/Uploads/'+data);
+            },
+            'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+                console.debug(errorMsg);
+            }
+
+        });
+    </script>
 </block>

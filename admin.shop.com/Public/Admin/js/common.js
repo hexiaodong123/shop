@@ -34,8 +34,8 @@ $(function() {
 
 
 function showAjaxLayer(msg){
-  console.debug(msg);
- /* if(msg.status==1){
+  //console.debug(msg);
+  if(msg.status==1){
     layer.open({
       content: msg.info,
       scrollbar: false,
@@ -52,6 +52,6 @@ function showAjaxLayer(msg){
       icon:2,
       time:2000
     });
-  }*/
+  }
 }
 

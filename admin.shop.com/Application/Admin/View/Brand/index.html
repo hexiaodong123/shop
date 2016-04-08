@@ -15,7 +15,7 @@
                 <tr align="center">
                     <td><input type="checkbox" class="supplier" name="id[]" value="{$row.id}"/> {$row.name} </td>
                     <td>{$row.url}</td>
-                    <td>{$row.logo}</td>
+                    <td><img src="{$row.logo}" width="30px" height="30px"></td>
                     <td>{$row.sort}</td>
                     <td>{$row.intro}</td>
                     <td><a class="ajax-get" onclick="window.event.returnValue=false" href="{:U('change',array('id'=>$row['id'],'status'=>1-$row['status']))}"><img src=__IMG__/{$row.status}.gif></a></td>

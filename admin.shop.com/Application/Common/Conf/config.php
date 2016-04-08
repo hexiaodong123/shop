@@ -6,7 +6,8 @@ return array(
         '__CSS__'=>URL.'/Public/Admin/css',
         '__JS__'=>URL.'/Public/Admin/js',
         '__IMG__'=>URL.'/Public/Admin/image',
-        '__LAYER__'=>URL.'/Public/Admin/layer-v2.1/layer'
+        '__LAYER__'=>URL.'/Public/Admin/layer-v2.1/layer',
+        '__UPLOAD__'=>URL.'/Public/Admin/uploadify'
     ),
 
     //>>数据库的配置数据
