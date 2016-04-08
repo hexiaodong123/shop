@@ -40,8 +40,6 @@ class BaseController extends Controller
         header('Content-Type:text/html;charset=utf-8');
         if(IS_POST){
             $data=$this->model->create();
-            dump($data);
-            exit;
             if($data!==false){
                 if($data['id']!==''){
                     $result=$this->model->save();
