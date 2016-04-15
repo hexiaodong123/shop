@@ -1,4 +1,5 @@
-<?php namespace Admin\Model;
+<?php
+namespace Admin\Model;
 
 
 class GoodsCategoryModel extends BaseModel
@@ -12,13 +13,23 @@ class GoodsCategoryModel extends BaseModel
         array('status', 'require', '是否显示@radio|1=是&0=否 不能为空'),
     );
 
-    public function getPageResult($keyword=''){
-        dump($keyword);
+    public function getResult($keyword='',$field='*',$id=0){
+        if($id!==0){
+            $condition['id']=array('eq',$id);
+        }
         $condition['name']=array('like',"%$keyword%");
-        $result=$this->where($condition)->order('left')->select();
-        dump($this->_sql());
-
+        $condition['status']=array('gt','-1');
+        $result=$this->field($field)->where($condition)->order('left')->select();
         return $result;
 
     }
+
+    public function arrToJson($field){
+        $result=$this->getResult('',$field);
+        return json_encode($result,JSON_UNESCAPED_UNICODE);
+    }
+
+
+
+
 }

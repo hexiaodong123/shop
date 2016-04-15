@@ -1,0 +1,108 @@
+<extend name="Common:edit"/>
+<block name="css">
+    <link href="__CSS__/common.css" rel="stylesheet" type="text/css"/>
+    <link href="__ZTREE__/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="display">
+    <div class="main-div">
+        <form method="post" action="{:U('add')}" >
+            <table cellspacing="1" cellpadding="3" width="100%">
+                <tr>
+                    <td class="label">{$meta_name}名称:</td>
+                    <td>
+                        <input type="text" name="name" value="{:isset($row['name'])?$row['name']:''}" maxlength="60" value="" />
+                        <span class="require-field">*</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label">父分类</td>
+                    <td>
+                        <input type="text" id="parent_category" disabled value="默认为顶级分类" maxlength="60" value="" />
+                        <input type="hidden" id="parent_category_id" name="parent_id" value="{$row['parent_id']}"/>
+                        <span class="require-field">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"></td>
+                    <td>
+                        <style type="text/css">
+                            .ztree{
+                                margin-top: 10px;
+                                border: 1px solid #617775;
+                                background: #f0f6e4;
+                                width: 220px;
+                                height: 200px;
+                                overflow-y: scroll;
+                                overflow-x: auto;
+                            }
+                        </style>
+                        <div class="zTreeDemoBackground left">
+                            <ul id="treeDemo" class="ztree"></ul>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td class="label">{$meta_name}简介</td>
+                    <td>
+                        <textarea  name="intro"  cols="60" rows="4"  >{:isset($row['intro'])?$row['intro']:''}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">是否显示</td>
+                    <td>
+
+                        <input type="radio" name="status" value="1" {:isset($row['status'])?($row['status']==1?'checked':''):'checked' }  /> 是
+                        <input type="radio" name="status" value="0" {:$row['status']===0?'checked':''}  /> 否
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><br />
+                        <input type="hidden" value="{:isset($row['id'])?$row['id']:''}" name="id"/>
+                        <input type="submit" class="button ajax-post" value=" 确定 " onclick="window.event.returnValue=false"/>
+                        <input type="reset" class="button" value=" 重置 " />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</block>
+<block name="js">
+    <script type="text/javascript" src="__ZTREE__/js/jquery.ztree.core-3.5.js"></script>
+    <!--<script type="text/javascript" src="__ZTREE__/js/jquery-1.4.4.min.js"></script>-->
+    <script type="text/javascript">
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true,
+                    pIdKey:"parent_id"
+                }
+            },
+            callback:{
+                onClick:function(event, treeId, treeNode){
+                    $("#parent_category").val(treeNode.name);
+                    $("#parent_category_id").val(treeNode.id);
+                }
+            }
+        };
+
+
+        var zNodes ={$zNodes};
+
+        $(function(){
+            var zTreeObj=$.fn.zTree.init($('#treeDemo'), setting, zNodes);
+            zTreeObj.expandAll(true);
+            <notempty name="row">
+              var id = {$row.parent_id};
+              var result = zTreeObj.getNodeByParam('id', id, null);
+              $("#parent_category").val(result.name);
+            </notempty>
+
+        });
+
+    </script>
+</block>

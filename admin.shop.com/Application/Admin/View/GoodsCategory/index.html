@@ -1,0 +1,44 @@
+<extend name="Common:index"/>
+<block name="delete_show_hidden"></block>
+<block name="display">
+    <div class="list-div" id="listDiv">
+        <table cellpadding="3" cellspacing="1" class="tree">
+            <tr align="center">
+                <th><input type='checkbox' id='head'/> {$meta_name}名称</th>
+                <th>分类简介</th>
+                <th>是否显示</th>
+                <th>操作</th>
+            </tr>
+            <volist name="rows" id="row">
+                <tr  class="treegrid-{$row['id']} <if condition='$row.parent_id gt 0'> treegrid-parent-{$row.parent_id}</if> " align="center" > <td>{$row.name} </td>
+                    <td>{$row.intro}</td>
+                    <td><a class="ajax-get" onclick="window.event.returnValue=false" href="{:U('change',array('id'=>$row['id'],'status'=>1-$row['status']))}"><img src=__IMG__/{$row.status}.gif></a></td>
+                    <td>
+                        <a href="{:U('add',array('id'=>$row['id']))}" >编辑</a>
+                        <a class="ajax-get" href="{:U('remove',array('id'=>$row['id']))}" onclick="window.event.returnValue=false">删除</a>
+                    </td>
+                </tr>
+            </volist>
+
+
+        </table>
+        <!-- 分页开始 -->
+        <div class="digg">
+            {$page_html}
+        </div>
+
+        <!-- 分页结束 -->
+    </div>
+
+
+</block>
+<block name="css">
+    <link rel="stylesheet" type="text/css" href="__TREEGRID__/css/jquery.treegrid.css">
+</block>
+<block name="js">
+    <script type="text/javascript" src="__TREEGRID__/js/jquery.treegrid.js"></script>
+    <script type="text/javascript">
+        $(".tree").treegrid();
+    </script>
+
+</block>

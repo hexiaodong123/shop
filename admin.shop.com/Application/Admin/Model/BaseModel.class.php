@@ -15,7 +15,7 @@ class BaseModel extends Model
 {
     protected $patchValidate=true;
 
-    public function getPageResult($keyword){
+    public function getPageResult($keyword=''){
         //>>1.获取查询的总记录数
         $condition['status']=array('gt',-1);
         $condition['name']=array('exp',"like '%$keyword%'");

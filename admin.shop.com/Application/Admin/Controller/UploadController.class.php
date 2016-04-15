@@ -32,7 +32,7 @@ class UploadController extends Controller
 
     }
     public function test(){
-        phpinfo();
+        $this->display('test');
     }
 
 }
