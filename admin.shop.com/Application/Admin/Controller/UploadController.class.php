@@ -22,6 +22,7 @@ class UploadController extends Controller
         );
         $upload=new \Think\Upload($config);
         $result=$upload->uploadOne($_FILES['fileData']);
+        echo $result['name'].'@';
         if($result!==false){
             echo $result['savepath'].$result['savename'];
         }else{

@@ -7,7 +7,10 @@ return array(
         '__JS__'=>URL.'/Public/Admin/js',
         '__IMG__'=>URL.'/Public/Admin/image',
         '__LAYER__'=>URL.'/Public/Admin/layer-v2.1/layer',
-        '__UPLOAD__'=>URL.'/Public/Admin/uploadify'
+        '__UPLOAD__'=>URL.'/Public/Admin/uploadify',
+        '__TREEGRID__'=>URL.'/Public/Admin/treegrid',
+        '__ZTREE__'=>URL.'/Public/Admin/zTree',
+        '__UEDITOR__'=>URL.'/Public/Admin/ueditor'
     ),
 
     //>>数据库的配置数据

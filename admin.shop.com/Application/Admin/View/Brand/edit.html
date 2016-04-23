@@ -28,9 +28,9 @@
                         <input type="file" id="logo_upload" name="logo"  maxlength="60" value="" />
                         <input type='hidden' class="logo" name='logo' maxlength='60'/>
 
-                        <div class="upload-img-box" style="display: none">
+                        <div class="upload-img-box" style="display:{:isset($row['logo'])?block:none}">
                             <div class="upload-pre-item">
-                                <img src="">
+                                <img src="{:isset($row['logo'])?$row['logo']:''}">
                             </div>
                         </div>
                     </td>
@@ -75,16 +75,18 @@
         $("#logo_upload").uploadify({
             height:30,
             width:100,
-            debug:true,
             buttonText:"上传图片",
             formData:{'dir':'Brand/','root':'./Uploads/'},
             swf:"__UPLOAD__/uploadify.swf",
             uploader:"{:U('Upload/index')}",
             fileObjName:'fileData',
             onUploadSuccess:function(file,data,response){
+                var index=data.indexOf('@');
+                var img_name=data.slice(0,index);
+                var img_root=data.slice(index+1);
                 $(".upload-img-box").css('display','block');
-                $('.upload-pre-item').children('img').attr('src','/Uploads/'+data);
-                $('.logo').val('/Uploads/'+data);
+                $('.upload-pre-item').children('img').attr('src','/Uploads/'+img_root);
+                $('.logo').val('/Uploads/'+img_root);
             },
             'onUploadError' : function(file, errorCode, errorMsg, errorString) {
                 console.debug(errorMsg);
