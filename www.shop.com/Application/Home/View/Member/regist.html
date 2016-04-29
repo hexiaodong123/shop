@@ -1,13 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
+	<style type="text/css">
+		.errorMsg{
+			color:red;
+		}
+	</style>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>用户注册</title>
-	<link rel="stylesheet" href="style/base.css" type="text/css">
-	<link rel="stylesheet" href="style/global.css" type="text/css">
-	<link rel="stylesheet" href="style/header.css" type="text/css">
-	<link rel="stylesheet" href="style/login.css" type="text/css">
-	<link rel="stylesheet" href="style/footer.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/base.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/global.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/header.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/login.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/footer.css" type="text/css">
 </head>
 <body>
 	<!-- 顶部导航 start -->
@@ -18,7 +23,7 @@
 			</div>
 			<div class="topnav_right fr">
 				<ul>
-					<li>您好，欢迎来到京西！[<a href="login.html">登录</a>] [<a href="register.html">免费注册</a>] </li>
+					<li>您好，欢迎来到京西！[<a href="{:U('Member/login')}">登录</a>] [<a href="{:U('Member/reg')}">免费注册</a>] </li>
 					<li class="line">|</li>
 					<li>我的订单</li>
 					<li class="line">|</li>
@@ -35,7 +40,7 @@
 	<!-- 页面头部 start -->
 	<div class="header w990 bc mt15">
 		<div class="logo w990">
-			<h2 class="fl"><a href="index.html"><img src="images/logo.png" alt="京西商城"></a></h2>
+			<h2 class="fl"><a href="index.html"><img src="__IMG__/logo.png" alt="三亿商城"></a></h2>
 		</div>
 	</div>
 	<!-- 页面头部 end -->
@@ -48,32 +53,34 @@
 		</div>
 		<div class="login_bd">
 			<div class="login_form fl">
-				<form action="" method="post">
+				<form action="{:U('reg')}" method="post" id="reg_form">
 					<ul>
 						<li>
 							<label for="">用户名：</label>
-							<input type="text" class="txt" name="username" />
+							<input type="text" class="txt" name="username" /><span></span>
 							<p>3-20位字符，可由中文、字母、数字和下划线组成</p>
 						</li>
 						<li>
 							<label for="">密码：</label>
-							<input type="password" class="txt" name="password" />
-							<p>6-20位字符，可使用字母、数字和符号的组合，不建议使用纯数字、纯字母、纯符号</p>
+							<input type="password" class="txt" name="password" id="password"/><span></span>
+							<p>6-20位字符，必须使用字母和数字的组合</p>
 						</li>
 						<li>
 							<label for="">确认密码：</label>
-							<input type="password" class="txt" name="password" />
-							<p> <span>请再次输入密码</p>
+							<input type="password" class="txt" name="repassword" /><span></span>
+							<p> <span>请再次输入密码</span></p>
 						</li>
-						<li class="checkcode">
-							<label for="">验证码：</label>
-							<input type="text"  name="checkcode" />
-							<img src="images/checkcode1.jpg" alt="" />
-							<span>看不清？<a href="">换一张</a></span>
+						<li>
+							<label for="">邮箱：</label>
+							<input type="text" class="txt" name="email" /><span></span>
+						</li>
+						<li>
+							<label for="">手机号码：</label>
+							<input type="text" class="txt" name="tel" /><span></span>
 						</li>
 						<li>
 							<label for="">&nbsp;</label>
-							<input type="checkbox" class="chb" checked="checked" /> 我已阅读并同意《用户注册协议》
+							<input type="checkbox" class="chb" checked="checked" name="agree" /> 我已阅读并同意《用户注册协议》<span></span>
 						</li>
 						<li>
 							<label for="">&nbsp;</label>
@@ -115,13 +122,135 @@
 			 © 2005-2013 京东网上商城 版权所有，并保留所有权利。  ICP备案证书号:京ICP证070359号 
 		</p>
 		<p class="auth">
-			<a href=""><img src="images/xin.png" alt="" /></a>
-			<a href=""><img src="images/kexin.jpg" alt="" /></a>
-			<a href=""><img src="images/police.jpg" alt="" /></a>
-			<a href=""><img src="images/beian.gif" alt="" /></a>
+			<a href=""><img src="__IMG__/xin.png" alt="" /></a>
+			<a href=""><img src="__IMG__/kexin.jpg" alt="" /></a>
+			<a href=""><img src="__IMG__/police.jpg" alt="" /></a>
+			<a href=""><img src="__IMG__/beian.gif" alt="" /></a>
 		</p>
 	</div>
 	<!-- 底部版权 end -->
 
+	<script type="text/javascript" src="__JS__/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="__VALIDATION__/lib/jquery.js"></script>
+	<script type="text/javascript" src="__VALIDATION__/dist/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="__VALIDATION__/lib/jquery.form.js"></script>
+	<script type="text/javascript" src="__JS__/common.js"></script>
+	<script type="text/javascript" src="__LAYER__/layer.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$.validator.addMethod('checkUsername',function(value,element,param){
+			if(param){
+				var reg=/^[a-z0-9A-Z_\u4e00-\u9fa5-]+$/ig;
+				var result=reg.test(value);
+				return result;
+			}
+		},"用户名只能由中文,字母,数字,下划线组成");
+
+		$.validator.addMethod('checkPassword',function(value,element,param){
+			if(param){
+				var reg=/^[a-zA-Z0-9]+$/;
+				return reg.test(value);
+			}
+		},"密码只能使用字母或数字");
+
+		$.validator.addMethod('checkTel',function(value,element){
+			var reg=/^1[3589][0-9]{9}$/ig;
+			return reg.test(value);
+
+		},"请输入正确格式的手机号");
+
+		$('#reg_form').validate({
+			rules:{
+				username:{
+					required:true,
+					rangelength:[3,20],
+					checkUsername:true,
+					remote:"{:U('check')}"
+				},
+				password:{
+					required:true,
+					rangelength:[6,20],
+					checkPassword:true
+				},
+				repassword:{
+					required:true,
+					equalTo:"#password"
+				},
+				email:{
+					required:true,
+					email:true,
+					remote:"{:U('check')}"
+				},
+				tel:{
+					required:true,
+					checkTel:true,
+					remote:"{:U('check')}"
+				},
+				agree:"required"
+
+			},
+			messages:{
+				username:{
+					required:"用户名不能为空",
+					rangelength:"用户名长度必须介于3--20之间",
+					remote:"用户名已存在"
+				},
+				password:{
+					required:"密码不能为空",
+					rangelength:"密码长度必须介于6--20之间"
+				},
+				repassword:{
+					required:"确认密码不能为空",
+					equalTo:"两次输入密码必须一致"
+				},
+				email:{
+					required:"邮箱不能为空",
+					email:"必须是正确的邮箱格式",
+					remote:"该邮箱已注册"
+				},
+				tel:{
+					required:"手机号不能为空",
+					remote:"该手机号码已注册"
+				},
+				agree:"必须同意"
+
+			},
+			errorPlacement: function(lable,obj){
+				var errorMsg=lable.html();
+				obj.next('span').html(errorMsg).addClass('errorMsg');
+			},
+			success:function(lable,element){
+				var str="<img src='__IMG__/1.gif'>";
+				$(element).next('span').html(str);
+			},
+			submitHandler:function(form){
+				$(form).ajaxSubmit({
+					success:function(msg){
+						if(msg.status==1){
+							layer.open({
+								content: msg.info,
+								scrollbar: false,
+								icon:1,
+								time:2000,
+								end:function(){
+									location.href=msg.url;
+								}
+							});
+						}else{
+							layer.open({
+								content:msg.info,
+								scrollbar:false,
+								icon:2,
+								time:2000
+							});
+						}
+
+					}
+				});
+			}
+		});
+	});
+
+</script>
 </body>
 </html>

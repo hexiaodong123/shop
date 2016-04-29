@@ -24,7 +24,7 @@
 			</div>
 			<div class="topnav_right fr">
 				<ul>
-					<li>您好，欢迎来到三亿！[<a href="{:U('Member/login')}">登录</a>] [<a href="register.html">免费注册</a>] </li>
+					<li>您好<notempty name="userinfo">{$userinfo.username}</notempty>，欢迎来到三亿！[<empty name="userinfo"><a href="{:U('Member/login')}">登录</a></empty><notempty name="userinfo"><a href="{:U('Member/logout')}">退出登录</a></notempty>] [<a href="{:U('Member/reg')}">免费注册</a>] </li>
 					<li class="line">|</li>
 					<li>我的订单</li>
 					<li class="line">|</li>
@@ -75,7 +75,7 @@
 					</dt>
 					<dd>
 						<div class="prompt">
-							您好，请<a href="">登录</a>
+							您好<notempty name="userinfo">{$userinfo.username}</notempty>，[<empty name="userinfo"><a href="{:U('Member/login')}">请登录</a></empty><notempty name="userinfo"><a href="{:U('Member/logout')}">退出登录</a></notempty>]
 						</div>
 						<div class="uclist mt10">
 							<ul class="list1 fl">

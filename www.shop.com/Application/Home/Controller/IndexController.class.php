@@ -5,8 +5,83 @@ use Think\Controller;
 
 class IndexController extends Controller
 {
+    protected function getCategory(){  //获取所有商品分类数据
+        $category_model=D('GoodsCategory');
+        $goods_categorys=$category_model->getCategory();
+        return $goods_categorys;
+    }
+
     public function index()
     {
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+
+        //>>1.获取所有商品分类数据
+        $goods_categorys=$this->getCategory();
+        //>>2.获取商品数据
+        $goods_model=D('goods');
+        $goods_1s=$goods_model->getGoodsinfo('1,3,5,7','',5);
+        $goods_2s=$goods_model->getGoodsinfo('2,3,6,7','',5);
+        $goods_3s=$goods_model->getGoodsinfo('4,5,6,7','',5);
+        //>>保存当前页面,以便登录后跳转回来
+        cookie('forward_url',$_SERVER['REQUEST_URI']);
+
+        //>>3.将数据分配到前台页面
+        $this->assign('title_name',"三亿商城");
+        $this->assign('userinfo',session('userinfo')[0]);
+        $this->assign('goods_1s',$goods_1s);
+        $this->assign('goods_2s',$goods_2s);
+        $this->assign('goods_3s',$goods_3s);
+        $this->assign('goods_categorys',$goods_categorys);
+        $this->display('index'); //展示首页
+    }
+
+    public  function lst($id=8){
+        //>>获取所有商品分类数据
+        $goods_categorys=$this->getCategory();
+        //>>获取当前类及其父类
+        $parent_categorys=D('goods_category')->getParentCategory($id);
+        //>>获取当前类及其子类
+        $child_categorys=D('goods_category')->getChildCategory($id);
+        //>>获取当前类及其子类的id
+        $child_categorys_id=D('goods_category')->getChildCategoryId($id);
+        //>>获取当前类及其子类对应的商品
+        $goods=D('goods')->getGoodsInfo('',$child_categorys_id);
+        //>>获取当前类及其子类对应的热销商品
+        $goods_hot=D('goods')->getGoodsInfo('4,5,6,7',$child_categorys_id,3);
+        //>>获取当前类及其子类对应的新品
+        $goods_new=D('goods')->getGoodsInfo('1,3,5,7',$child_categorys_id,3);
+        //>>保存当前页面,以便登录后跳转回来
+        cookie('forward_url',$_SERVER['REQUEST_URI']);
+
+
+        //>>3.将数据分配到前台页面
+        $this->assign('userinfo',session('userinfo')[0]);
+        $this->assign('child_categorys',$child_categorys);
+        $this->assign('goods_hot',$goods_hot);
+        $this->assign('goods_new',$goods_new);
+        $this->assign('goods',$goods);
+        $this->assign('parent_categorys',$parent_categorys);
+        $this->assign('goods_categorys',$goods_categorys);
+        $this->display('list');//展示商品列表
+    }
+
+    public  function goods($id=39){
+        //>>获取分类数据
+        $goods_categorys=$this->getCategory();
+        //>>获取商品数据
+        $goods_info=D('goods')->getGoodsInfo('','','',$id);
+        //>>获取当前商品的父类
+        $category_id=$goods_info[0]['goods_category'];
+        $parentCategorys=D('goods_category')->getParentCategory($category_id);
+        $parentCategorys[]=$goods_info[0];
+        //>>保存当前页面,以便登录后跳转回来
+        cookie('forward_url',$_SERVER['REQUEST_URI']);
+
+
+        //>>3.将数据分配到前台页面
+        $this->assign('userinfo',session('userinfo')[0]);
+        $this->assign('parentCategorys',$parentCategorys);
+        $this->assign('goods_info',$goods_info[0]);
+        $this->assign('goods_categorys',$goods_categorys);
+        $this->display('goods');//展示商品列表
     }
 }
